@@ -26,7 +26,7 @@
 
     <x-modal id="add-patient-modal" title="Agregar Nuevo Paciente" class="modal-lg">
         <div class="modal-body">
-            <div class="row">
+            <div class="row mb-3">
                 <div class="col">
                     <label for="">CI</label>
                     <input type="number" class="form-control" placeholder="Ingrese su CI">
@@ -36,7 +36,7 @@
                     <input type="text" class="form-control" placeholder="Ingrese Nombre Completo">
                 </div>
             </div>
-            <div class="row">
+            <div class="row mb-3">
                 <div class="col"><label for="">Genero</label>
                     <select name="" id="" class="form-select">
                         <option value="">Masculino</option>
@@ -49,7 +49,7 @@
                 </div>
             </div>
 
-            <div class="row">
+            <div class="row mb-3">
                 <div class="col">
                     <label for="">Telefono</label>
                     <input type="tel" class="form-control" placeholder="Ingrese su Telefono">
@@ -57,6 +57,18 @@
                 <div class="col">
                     <label for="">Celular de Referencia</label>
                     <input type="tel" class="form-control" placeholder="Ingrese Celular de Referencia">
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col">
+                    <label for="">Email</label>
+                    <input type="email" class="form-control" placeholder="Ingrese su Email">
+                </div>
+                <div class="col"><label for="">Estado de Cuenta</label>
+                    <select name="" id="" class="form-select">
+                        <option value="">Activo</option>
+                        <option value="">Inactivo</option>
+                    </select>
                 </div>
             </div>
         </div>
