@@ -1,0 +1,345 @@
+@import '../../public/vendor/adminlte/dist/css/adminlte.css';
+
+/* 1. VARIABLES DE COLOR */
+:root {
+    --color-fondo-principal: #f8fafc;
+    --color-fondo-widgets: #00b3b0;
+    --color-bordes: #f8fafc;
+    --color-texto-principal: white;
+    --color-texto-secundario: black;
+    --color-acento-dorado: white;
+    --color-acento-dorado-hover: #00b3b0;
+
+    --primary: #00b3b0;
+}
+
+/* 2. ESTILOS GENERALES Y LAYOUT */
+
+body, .wrapper {
+    color: var(--color-texto-principal);
+}
+
+.wrapper {
+    background-color: #f8fafc !important;
+}
+.content-wrapper, .content-header {
+    background-color: transparent !important;
+}
+
+/* 3. BARRA DE NAVEGACIÓN (HEADER) */
+.main-header.navbar {
+    background-color: var(--color-fondo-widgets);
+    border-bottom: 1px solid var(--color-bordes);
+}
+.main-header .nav-link {
+    color: var(--color-texto-principal);
+}
+
+/* 4. BARRA LATERAL (SIDEBAR) */
+.main-sidebar {
+    background-color: var(--color-fondo-widgets);
+}
+.brand-link {
+    background-color: var(--color-fondo-widgets) !important;
+    border-bottom: 1px solid var(--color-bordes);
+}
+.brand-link .brand-text {
+    color: var(--color-acento-dorado) !important;
+    font-weight: bold;
+}
+.nav-header {
+    color: var(--color-acento-dorado) !important;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+.nav-sidebar .nav-link {
+    color: var(--color-texto-principal) !important;
+}
+.nav-sidebar .nav-link:hover {
+    background-color: var(--color-bordes);
+}
+.nav-sidebar .nav-link:hover i.nav-icon {
+    color: var(--color-acento-dorado) !important;
+}
+.nav-sidebar .nav-item > .nav-link.active,
+.nav-sidebar .nav-item > .nav-link.active:focus {
+    background-color: var(--color-acento-dorado) !important;
+    color: #000000 !important;
+    font-weight: bold;
+    box-shadow: none !important;
+}
+.nav-sidebar .nav-link.active i.nav-icon {
+    color: #000000 !important;
+}
+
+
+/* 5. TARJETAS Y WIDGETS (CARDS) */
+/* FONDO DE LA TARJETA */
+/* .card { */
+/*     background-color: var(--color-fondo-widgets); */
+/*     border: 1px solid var(--color-bordes); */
+/*     box-shadow: none; */
+/* } */
+/* .card-header { */
+/*     border-bottom: 1px solid var(--color-bordes); */
+/* } */
+/* h1, h2, h3, h4, h5, h6 { */
+/*     color: var(--color-texto-principal); */
+/* } */
+.content-header h1 {
+    color: var(--color-texto-secundario);
+    font-weight: bold;
+}
+
+
+/* 6. BOTONES Y ENLACES */
+.btn-primary,
+.btn-primary:hover,
+.btn-primary:active,
+.btn-primary:focus,
+.btn-warning {
+    background-color: var(--primary) !important;
+    border-color: var(--color-acento-dorado) !important;
+    color: white !important;
+    font-weight: bold;
+    box-shadow: none !important;
+}
+
+
+.btn-primary:focus {
+    border-color: white !important;
+}
+
+.btn-primary:hover,
+.btn-warning:hover {
+    background-color: var(--color-acento-dorado-hover) !important;
+    border-color: var(--color-acento-dorado-hover) !important;
+}
+
+a {
+    color: var(--color-acento-dorado);
+}
+a:hover {
+    color: var(--color-acento-dorado-hover);
+}
+
+
+/* 7. ICONOS SUPERIORES */
+.main-header .nav-link[data-widget="pushmenu"] i,
+.main-header .nav-link[data-widget="fullscreen"] i {
+    color: var(--color-acento-dorado);
+}
+.main-header .nav-link[data-widget="pushmenu"]:hover i,
+.main-header .nav-link[data-widget="fullscreen"]:hover i {
+    color: var(--color-acento-dorado-hover);
+}
+
+div.dataTables_wrapper div.row {
+    background: transparent !important;
+    color: var(--color-texto-secundario) !important;
+}
+
+.dataTables_length label, .dataTables_filter label {
+    color: var(--color-texto-secundario) !important;
+    font-weight: normal;
+}
+
+.dataTables_length select, .dataTables_filter input {
+    background-color: var(--color-fondo-principal) !important;
+    color: var(--color-texto-principal) !important;
+    border: 1px solid #00b3b0 !important;
+}
+
+/* Cabecera de la tabla */
+table.dataTable thead th {
+    color: var(--color-texto-principal) !important;
+    background-color: white !important;
+    /* border-bottom: 2px solid var(--color-bordes) !important; */
+}
+
+/* Filas de la tabla */
+table.dataTable tbody tr {
+    background-color: transparent !important;
+    color: var(--color-texto-principal) !important;
+}
+table.dataTable.table-hover tbody tr:hover {
+    background-color: var(--color-fondo-principal) !important;
+}
+table.dataTable tbody td {
+    border-top: 1px solid var(--color-bordes) !important;
+}
+
+/* Paginación */
+.dataTables_paginate .page-item a.page-link {
+    background-color: var(--color-fondo-widgets) !important;
+    border: 1px solid #00b3b8 !important;
+    color: var(--color-texto-secundario) !important;
+}
+.dataTables_paginate .page-item.disabled a.page-link {
+    background-color: var(--color-fondo-widgets) !important;
+    color: white !important;
+}
+.dataTables_paginate .page-item a.page-link:hover {
+    background-color: var(--color-bordes) !important;
+}
+.dataTables_paginate .page-item.active a.page-link {
+    background-color: var(--color-acento-dorado) !important;
+    border-color: #00b3b8 !important;
+    color: #000000 !important;
+}
+
+.dataTables_wrapper .btn-primary,
+.dataTables_wrapper .btn-info {
+    background-color: var(--primary) !important;
+    border-color: var(--color-acento-dorado) !important;
+    color: white !important;
+}
+
+/* LOGIN */
+body.login-page,
+body.register-page {
+    background-color: var(--color-fondo-widgets) !important;
+}
+
+.login-logo a,
+.register-logo a {
+    color: var(--color-acento-dorado) !important;
+}
+
+.login-page .card,
+.register-page .card {
+    background-color: var(--color-fondo-principal);
+    border: 1px solid var(--color-bordes);
+}
+
+.login-card-body .card-header,
+.register-card-body .card-header {
+    border-color: var(--color-bordes);
+}
+
+.login-page .login-box-msg,
+.register-page .register-box-msg {
+    color: var(--color-texto-principal);
+}
+
+/* .login-page .input-group .form-control, */
+/* .register-page .input-group .form-control { */
+    /* background-color: var(--color-fondo-widgets); */
+    /* border-color: var(--color-bordes); */
+    /* color: var(--color-texto-principal); */
+/* } */
+
+/* .login-page .input-group .form-control:focus, */
+/* .register-page .input-group .form-control:focus { */
+/*     border-color: var(--color-acento-dorado); */
+/*     box-shadow: none; */
+/* } */
+
+/* .login-page .input-group .input-group-text, */
+/* .register-page .input-group .input-group-text { */
+/*     background-color: var(--color-fondo-widgets); */
+/*     border-color: var(--color-bordes); */
+/*     color: var(--color-texto-secundario); */
+/* } */
+
+.login-page .btn-primary,
+.register-page .btn-primary {
+    /* background-color: var(--color-acento-dorado) !important; */
+    border-color: var(--color-acento-dorado) !important;
+    color: white !important;
+    font-weight: bold;
+}
+
+.login-page .btn-primary:hover,
+.register-page .btn-primary:hover {
+    background-color: var(--color-acento-dorado-hover) !important;
+    border-color: var(--color-acento-dorado-hover) !important;
+}
+
+.login-page p a,
+.register-page p a {
+    color: var(--color-acento-dorado-hover);
+}
+
+.login-page p a:hover,
+.register-page p a:hover {
+    color: var(--color-texto-principal);
+}
+
+/* MODALES*/
+
+.modal-content {
+    border: 1px solid var(--color-bordes);
+    /* color: var(--color-texto-principal); */
+}
+
+/* Cabecera */
+/* .modal-header { */
+/*     border-bottom: 1px solid var(--color-bordes); */
+/* } */
+
+/* Pie de página (botones) */
+/* .modal-footer { */
+/*     border-top: 1px solid var(--color-bordes); */
+/* } */
+
+/* .modal .form-control { */
+/*     background-color: var(--color-fondo-widgets); */
+/*     border-color: var(--color-bordes); */
+/*     color: var(--color-texto-principal); */
+/* } */
+/**/
+/* .modal .form-control:focus { */
+/*     border-color: var(--color-acento-dorado); */
+/*     color: var(--color-texto-principal); */
+/* } */
+
+/* Botón X*/
+.modal-header .close, .modal-header .btn-close {
+    color: var(--color-texto-principal) !important;
+    text-shadow: none !important;
+    opacity: 0.75;
+}
+.modal-header .close:hover, .modal-header .btn-close:hover {
+    color: white !important;
+    opacity: 1;
+}
+
+.card-body .table > thead {
+    color: var(--color-texto-principal) !important;
+    border-bottom: 2px solid var(--color-bordes) !important;
+
+}
+
+
+.card-body .table > thead > tr > th {
+    color: black !important;
+    font-weight: bold;
+    border-bottom-width: 2px;
+}
+
+
+.glow-border {
+    border: 2px solid #ffca2c;
+    border-radius: 5px;
+    animation: blink 1.5s infinite;
+}
+
+@keyframes blink {
+    0% {
+        box-shadow: 0 0 5px #ffca2c, 0 0 10px #ffca2c;
+    }
+
+    50% {
+        box-shadow: 0 0 0px #ffca2c;
+    }
+
+    100% {
+        box-shadow: 0 0 5px #ffca2c, 0 0 10px #ffca2c;
+    }
+}
+
+ .dataTables_length select, .dataTables_filter input{
+    color: black !important;
+}
