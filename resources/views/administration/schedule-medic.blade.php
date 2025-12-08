@@ -1,20 +1,23 @@
 @extends('layouts.main')
+
 @section('header')
-    <h1>Pacientes</h1>
-    <a data-bs-toggle="modal" data-bs-target="#add-patient-modal" href="#" class="btn btn-primary"><i
-            class="fa fa-plus"></i> Agregar Nuevo Paciente</a>
+    <h1>Agenda Medica</h1>
+    <a data-bs-toggle="modal" data-bs-target="#schedule-modal" class="btn btn-primary mb-2"><i class="fa fa-plus"></i> Agregar
+        Nueva Cita</a>
 @endsection
 
 @section('content')
     <div class="card">
         <div class="card-body">
-            <x-adminlte.tool.datatable id="patients-table" :heads="$heads">
+            <x-adminlte.tool.datatable id="schedule-table" :heads="$heads">
                 @foreach ($data as $item)
                     <tr>
                         <td>{{ $item[0] }}</td>
                         <td>{{ $item[1] }}</td>
                         <td>{{ $item[2] }}</td>
                         <td>{{ $item[3] }}</td>
+                        <td>{{ $item[4] }}</td>
+                        <td>{{ $item[5] }}</td>
                         <td>
                             <a href="#" class="btn btn-primary"><i class="fa fa-pen"></i></a>
                             <a href="#" class="btn btn-danger"><i class="fa fa-trash"></i></a>
@@ -25,7 +28,7 @@
         </div>
     </div>
 
-    <x-modal id="add-patient-modal" title="Agregar Nuevo Paciente" class="modal-lg">
+    <x-modal id="schedule-modal" title="Agregar Cita Medica" class="modal-lg">
         <div class="modal-body">
             <div class="row mb-3">
                 <div class="col">
@@ -69,6 +72,33 @@
                     <select name="" id="" class="form-select">
                         <option value="">Activo</option>
                         <option value="">Inactivo</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <label for="">Medico</label>
+                    <select name="" id="" class="form-select">
+                        <option value="">Seleccione Medico</option>
+                    </select>
+                </div>
+                <div class="col">
+                    <label for="">Especialidad</label>
+                    <select name="" id="" class="form-select">
+                        <option value="">Seleccione Especialidad</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <label for="">Dia</label>
+                    <input type="date" class="form-control">
+                </div>
+                <div class="col">
+                    <label for="">Horario</label>
+                    <select class="form-select">
+                        <option value="">Seleccione Horario</option>
                     </select>
                 </div>
             </div>
