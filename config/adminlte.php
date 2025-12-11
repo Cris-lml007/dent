@@ -322,7 +322,7 @@ return [
         // ],
         [
             'text' => 'Principal',
-            'url' => 'admin/pages',
+            'route' => 'administration.dashboard',
             'icon' => 'fa fa-home',
             'label' => 4,
             'label_color' => 'success',

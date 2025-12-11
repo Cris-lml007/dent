@@ -7,7 +7,9 @@ use Illuminate\Http\Request;
 class AdministrationController extends Controller
 {
     public function index(){
-        return view('administration.dashboard');
+        $heads = ['ID', 'Horario','Paciente', 'Medico', 'Especialidad'];
+        $data = [];
+        return view('administration.dashboard',compact(['heads', 'data']));
     }
 
     public function scheduleMedic() {
