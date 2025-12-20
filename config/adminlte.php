@@ -367,7 +367,7 @@ return [
         ],
         [
             'text' => 'Configuraciones',
-            'url' => 'admin/settings',
+            'route' => 'administration.settings',
             'icon' => 'fa fa-cogs',
         ],
 

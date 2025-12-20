@@ -55,4 +55,9 @@ class AdministrationController extends Controller
         $data = [];
         return view('administration.staff', compact(['heads','data','specialtyHeads']));
     }
+
+    public function settings(){
+        $headSpecialty = ['ID','Nombre', 'Descripción'];
+        return view('administration.settings', compact(['headSpecialty']));
+    }
 }

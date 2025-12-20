@@ -18,4 +18,5 @@ Route::prefix('/dashboard')->controller(AdministrationController::class)->group(
     Route::get('/history', 'historyMedic')->name('administration.history-medic');
     Route::get('/patients', 'patients')->name('administration.patients');
     Route::get('/staff', 'staff')->name('administration.staff');
+    Route::get('/settings', 'settings')->name('administration.settings');
 });
