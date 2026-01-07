@@ -56,4 +56,8 @@ class User extends Authenticatable
     public function specialties(){
         return $this->belongsToMany(Specialty::class,'user_specialties');
     }
+
+    public function staffSchedules(){
+        return $this->hasMany(StaffSchedule::class, 'user_id');
+    }
 }

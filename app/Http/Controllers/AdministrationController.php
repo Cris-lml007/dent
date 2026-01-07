@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\Role;
+use App\Models\Person;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class AdministrationController extends Controller
@@ -50,9 +53,10 @@ class AdministrationController extends Controller
     }
 
     public function staff(){
-        $heads = ['CI', 'Nombre', 'Especialidad', 'Rol', 'Telefono', 'Opciones'];
+        // dd(User::all());
+        $heads = ['CI', 'Nombre Completo', 'Rol', 'Telefono', 'Estado','Opciones'];
         $specialtyHeads = ['ID', 'Nombre', 'Opciones'];
-        $data = [];
+        $data = Person::where('role','!=',Role::PATIENT->value)->get();
         return view('administration.staff', compact(['heads','data','specialtyHeads']));
     }
 

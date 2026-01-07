@@ -15,6 +15,10 @@
 
 /* 2. ESTILOS GENERALES Y LAYOUT */
 
+label {
+    color: black;
+}
+
 body, .wrapper {
     color: var(--color-texto-principal);
 }
