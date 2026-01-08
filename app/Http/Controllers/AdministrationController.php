@@ -44,11 +44,7 @@ class AdministrationController extends Controller
 
     public function patients(){
         $heads = ['CI', 'Nombre', 'Edad', 'Telefono', 'Opciones'];
-        $data = [
-            ['12345678', 'Juan Perez', '33 años', '555-1234'],
-            ['87654321', 'Maria Lopez', '22 años', '555-5678'],
-            ['11223344', 'Carlos Sanchez', '15 años', '555-8765'],
-        ];
+        $data = Person::all();
         return view('administration.patients', compact(['heads', 'data']));
     }
 

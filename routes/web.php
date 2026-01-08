@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdministrationController;
+use App\Livewire\PatientComponent;
 use App\Livewire\StaffComponent;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -24,4 +25,5 @@ Route::prefix('/dashboard')->group(function(){
     });
 
     Route::get('/staff/{person}', StaffComponent::class)->name('administration.staff.id');
+    Route::get('/patients/{person}',PatientComponent::class)->name('administration.patients.id');
 });
