@@ -72,6 +72,11 @@
                 @enderror
             </div>
         </div>
+        @if ($edit && $patient->id != null)
+        @if (!$patient->users()->where('role',\App\Enums\Role::PATIENT)->exists())
+            <div class="alert alert-warning"><i class="nf nf-cod-warning"></i> Este paciente no tiene una cuenta designada.</div>
+        @endif
+        @endif
     </div>
     <div class="modal-footer">
         <button class="btn btn-primary" wire:click="savePatient">Guardar</button>

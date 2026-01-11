@@ -22,16 +22,22 @@ class PatientComponent extends Component
 
     public Person $patient;
 
+    public $edit = false;
+
     public function mount(Person $person = null){
-        if($person->id != null && $person->user->role == Role::PATIENT){
+        if($person->id != null ){
             $this->ci = $person->ci;
             $this->name = $person->name;
             $this->gender = $person->gender;
             $this->birthdate = $person->birthdate;
             $this->phone = $person->phone;
             $this->ref_phone = $person->ref_phone;
-            $this->email = $person->user->email;
-            $this->active = $person->user->active;
+            $u = $person->users()->where('role',Role::PATIENT)->first();
+            $this->edit = true;
+            if($u){
+                $this->email = $u->email;
+                $this->active = $u->active;
+            }
 
             $this->patient = $person;
         }else{
@@ -52,14 +58,14 @@ class PatientComponent extends Component
             'birthdate' => 'required|date',
             'gender' => 'required',
             'phone' => 'required',
-            'email' => 'required|email',
-            'active' => 'required'
+            'email' => 'email|unique:users,email,'.$this?->patient?->users()->where('role',Role::PATIENT)?->first()?->id ?? '0',
+            // 'active' => 'required'
         ]);
         if($this->patient->id == null){
             $this->patient = new Person();
             $user = new User();
         }else{
-            $user = $this->patient->user;
+            $user = $this->patient->users()->where('role',Role::PATIENT)->first();
             if($user == null){
                 $user = new user();
             }
@@ -72,12 +78,15 @@ class PatientComponent extends Component
         $this->patient->ref_phone = $this->ref_phone;
         $this->patient->save();
 
-        $user->email = $this->email;
-        $user->role = Role::PATIENT;
-        $user->active = $this->active;
-        $user->person_id = $this->patient->id;
-        $user->password = Str::random(8);
-        $user->save();
+        if($this->email != null){
+            $user->email = $this->email;
+            $user->role = Role::PATIENT;
+            $user->active = $this->active;
+            $user->person_id = $this->patient->id;
+            $user->password = Str::random(8);
+            $user->save();
+        }
+
 
         return redirect()->route('administration.patients');
     }
