@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Enums\Role;
 use App\Models\Person;
 use App\Models\User;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 
 class AdministrationController extends Controller
@@ -52,7 +53,9 @@ class AdministrationController extends Controller
         // dd(User::all());
         $heads = ['CI', 'Nombre Completo', 'Rol', 'Telefono', 'Estado','Opciones'];
         $specialtyHeads = ['ID', 'Nombre', 'Opciones'];
-        $data = Person::where('role','!=',Role::PATIENT->value)->get();
+        $data = Person::whereHas('users',function (Builder $query){
+            $query->where('role','!=',Role::PATIENT);
+        })->get();
         return view('administration.staff', compact(['heads','data','specialtyHeads']));
     }
 

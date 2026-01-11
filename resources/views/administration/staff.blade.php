@@ -10,12 +10,15 @@
         <div class="card-body">
             <x-adminlte.tool.datatable id="staff-table" :heads="$heads">
                 @foreach ($data as $item)
+                @php
+                $u = $item->users()->where('role','!=',\App\Enums\Role::PATIENT)->first();
+                @endphp
                 <tr>
                     <td>{{ $item->ci }}</td>
                     <td>{{ $item->name }}</td>
-                    <td>{{ $item->user->role->name ?? '' }}</td>
+                    <td>{{ $u->role->name ?? '' }}</td>
                     <td>{{ $item->phone }}</td>
-                    <td><div @class(['badge', 'badge-success'=> $item->user->active == 1, 'badge-danger' => $item->user->active == 0])>{{ $item->user->active ? 'Habilitado' : 'Inhabilitado' }}</div></td>
+                    <td><div @class(['badge', 'badge-success'=> $u->active == 1, 'badge-danger' => $u->active == 0])>{{ $u->active == 1 ? 'Habilitado' : 'Inhabilitado' }}</div></td>
                     <td>
                         <a class="btn btn-primary" href="{{ route('administration.staff.id', $item->id) }}"><i class="fa fa-pen"></i></a>
                     </td>

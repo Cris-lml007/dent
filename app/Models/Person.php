@@ -16,8 +16,9 @@ class Person extends Model
         'ref_phone'
     ];
 
-    public function user(){
-        return $this->hasOne(User::class);
+    public function users(){
+        // return $this->hasOne(User::class);
+        return $this->hasMany(User::class);
     }
 
     protected function name(): Attribute{

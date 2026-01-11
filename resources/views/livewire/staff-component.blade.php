@@ -1,10 +1,13 @@
 <div>
     <div class="modal-body">
         <label for="">Información Personal</label>
+        @if (session('alert-person'))
+            <div class="alert alert-warning">{!! session('alert-person') !!}</div>
+        @endif
         <div class="row mb-3">
             <div class="col">
                 <label for="ci">CI</label>
-                <input type="text" class="form-control" id="ci" placeholder="Ingrese CI" wire:model="ci" />
+                <input type="number" class="form-control" id="ci" placeholder="Ingrese CI" wire:model.live="ci" @if($edit) disabled @endif/>
                 @error('ci')
                     <span class="text-danger">{{ $message }}</span>
                 @enderror
@@ -55,6 +58,9 @@
             </div>
         </div>
         <label for="">Información de Cuenta</label>
+        @if (session('alert-user'))
+            <div class="alert alert-warning">{!! session('alert-user') !!}</div>
+        @endif
         <div class="row mb-3">
             <div class="col">
                 <label for="email">Email</label>
@@ -210,7 +216,7 @@
     </div>
 
     <div class="modal-footer">
-        <button class="btn btn-primary" wire:click="saveStaff">Guardar</button>
+        <button class="btn btn-primary" wire:click="saveStaff" @if (session('alert-user')) disabled @endif>Guardar</button>
         <button class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
     </div>
 </div>
