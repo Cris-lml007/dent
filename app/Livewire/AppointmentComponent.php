@@ -182,6 +182,7 @@ class AppointmentComponent extends Component
         foreach( $this->finished as $item ){
             PeopleTreatment::where('id',$item)->update(['status'=> Status::FINISHED]);
         }
+        return $this->redirect(route('administration.dashboard'));
     }
 
     public function back(){

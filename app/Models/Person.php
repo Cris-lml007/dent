@@ -26,4 +26,8 @@ class Person extends Model
             get: fn(string $value) => ucwords($value)
         );
     }
+
+    public function histories(){
+        return $this->hasMany(History::class);
+    }
 }

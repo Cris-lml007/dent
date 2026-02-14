@@ -1,36 +1,29 @@
 <div>
     {{-- The Master doesn't talk, he acts. --}}
     <div class="d-flex justify-content-between mb-3">
-        <h3>Tratamientos</h3>
+        <h3 class="text-dark"><strong>Tratamientos</strong></h3>
         <button data-bs-toggle="modal" data-bs-target="#treatment-modal" class="btn btn-primary"><i class="fa fa-plus"></i>
             Añadir Tratamiento</button>
     </div>
-    <div class="d-flex justify-content-end mb-3">
-        <input wire:model.live="search" class="form-control" placeholder="Buscar" style="width: 300px;">
+    <div class="card">
+        <div class="card-body">
+            <x-adminlte.tool.datatable :heads="['ID', 'Nombre', 'Precio (Bs)', 'Opciones']" id="treatment-table">
+                @foreach ($treatments ?? [] as $item)
+                    <tr>
+                        <td>{{ $item->id }}</td>
+                        <td>{{ $item->name }}</td>
+                        <td>{{ $item->price }}</td>
+                        <td>
+                            <button data-bs-toggle="modal" data-bs-target="#treatment-modal"
+                                wire:click="getTreatment({{ $item->id }})" class="btn btn-primary"><i
+                                    class="fa fa-pen"></i></button>
+                            <button class="btn btn-danger"><i class="fa fa-trash"></i></button>
+                        </td>
+                    </tr>
+                @endforeach
+            </x-adminlte.tool.datatable>
+        </div>
     </div>
-    <table class="table table-striped">
-        <thead>
-            <th>ID</th>
-            <th>Nombre</th>
-            <th>Precio (Bs)</th>
-            <th>Opciones</th>
-        </thead>
-        <tbody>
-            @foreach ($treatments ?? [] as $item)
-                <tr>
-                    <td>{{ $item->id }}</td>
-                    <td>{{ $item->name }}</td>
-                    <td>{{ $item->price }}</td>
-                    <td>
-                        <button data-bs-toggle="modal" data-bs-target="#treatment-modal"
-                            wire:click="getTreatment({{ $item->id }})" class="btn btn-primary"><i
-                                class="fa fa-pen"></i></button>
-                        <button class="btn btn-danger"><i class="fa fa-trash"></i></button>
-                    </td>
-                </tr>
-            @endforeach
-        </tbody>
-    </table>
 
     <x-modal id="treatment-modal" title="Nuevo Tratamiento">
         <div class="modal-body">
@@ -50,3 +43,15 @@
         </div>
     </x-modal>
 </div>
+
+@script
+    <script>
+        Livewire.hook('morphed', () => {
+            $('#treatment-table').DataTable()
+        });
+
+        $wire.on('modalClose', () => {
+            $('#treatment-modal').modal('hide');
+        })
+    </script>
+@endscript

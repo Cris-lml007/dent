@@ -44,6 +44,7 @@ class TreatmentComponent extends Component
         $this->name = null;
         $this->description = null;
         $this->price = null;
+        $this->dispatch('modalClose');
     }
 
     public function render()

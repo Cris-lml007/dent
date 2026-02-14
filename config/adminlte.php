@@ -300,15 +300,15 @@ return [
 
     'menu' => [
         // Navbar items:
-        [
-            'type' => 'navbar-search',
-            'text' => 'search',
-            'topnav_right' => true,
-        ],
-        [
-            'type' => 'fullscreen-widget',
-            'topnav_right' => true,
-        ],
+        // [
+        //     'type' => 'navbar-search',
+        //     'text' => 'search',
+        //     'topnav_right' => true,
+        // ],
+        // [
+        //     'type' => 'fullscreen-widget',
+        //     'topnav_right' => true,
+        // ],
 
         // Sidebar items:
         // [
@@ -324,7 +324,6 @@ return [
             'text' => 'Principal',
             'route' => 'administration.dashboard',
             'icon' => 'fa fa-home',
-            'label' => 4,
             'label_color' => 'success',
         ],
         ['header' => 'Funciones principales'],
@@ -343,33 +342,33 @@ return [
             'route' => 'administration.patients',
             'icon' => 'fa fa-users',
         ],
-        ['header' => 'Gestión de farmacia'],
+        ['header' => 'Gestión Medica'],
         [
-            'text' => 'Recetas Medicas',
-            'url' => 'admin/settings',
-            'icon' => 'fa fa-prescription-bottle-alt',
+            'text' => 'Tratamientos',
+            'route' => 'administration.treatments',
+            'icon' => 'nf nf-fa-book_medical',
         ],
         [
-            'text' => 'Medicamentos',
-            'url' => 'admin/settings',
-            'icon' => 'fa fa-pills',
+            'text' => 'Especialidades',
+            'route' => 'administration.specialties',
+            'icon' => 'nf nf-md-bookmark_plus',
         ],
         ['header' => 'Avanzados'],
-        [
-            'text' => 'Reportes',
-            'url' => 'admin/settings',
-            'icon' => 'fa fa-chart-bar',
-        ],
         [
             'text' => 'Personal',
             'route' => 'administration.staff',
             'icon' => 'fa fa-user-md',
         ],
         [
-            'text' => 'Configuraciones',
-            'route' => 'administration.settings',
-            'icon' => 'fa fa-cogs',
+            'text' => 'Reportes',
+            'route' => 'administration.report',
+            'icon' => 'fa fa-chart-bar',
         ],
+        // [
+        //     'text' => 'Configuraciones',
+        //     'route' => 'administration.settings',
+        //     'icon' => 'fa fa-cogs',
+        // ],
 
 
 
