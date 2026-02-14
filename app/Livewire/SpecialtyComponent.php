@@ -11,7 +11,7 @@ class SpecialtyComponent extends Component
 
     #[Validate('required')]
     public $title;
-    // #[Validate('required')]
+    #[Validate('required')]
     public $description;
     public Specialty $specialty;
 

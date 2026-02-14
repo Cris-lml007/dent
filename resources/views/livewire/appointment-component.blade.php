@@ -55,15 +55,19 @@
         <div class="col">
             <label for="">Motivo de la Consulta</label>
             <textarea wire:model="description" rows="3" cols="" class="form-control"
-                placeholder="Ingrese Motivo de la Consulta..." @if($status == 1) disabled @endif></textarea>
+                placeholder="Ingrese Motivo de la Consulta..." @if ($status == 1) disabled @endif></textarea>
+            @error('description')
+                <span class="text-danger">{{ $message }}</span>
+            @enderror
         </div>
     </div>
 
     <div class="row mb-3">
         <div class="d-flex justify-content-between">
             <h5 class="text-dark"><strong>Plan de Tratamientos</strong></h5>
-            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#treatment-modal" @if($status == 1) disabled @endif><i
-                    class="fa fa-plus"></i> Añadir Nuevo Tratamiento</button>
+            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#treatment-modal"
+                @if ($status == 1) disabled @endif><i class="fa fa-plus"></i> Añadir Nuevo
+                Tratamiento</button>
         </div>
     </div>
 
@@ -98,7 +102,8 @@
                             </td>
                             <td>
                                 <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#treatment-modal"
-                                    wire:click="getTreatment({{ $item->id }})" @if($status == 1) disabled @endif><i class="fa fa-pen"></i></button>
+                                    wire:click="getTreatment({{ $item->id }})"
+                                    @if ($status == 1) disabled @endif><i class="fa fa-pen"></i></button>
                                 <button wire:click="toggleFinished({{ $item->id }})" @class([
                                     'btn',
                                     'btn-success' => in_array($item->id, $finished),
@@ -106,7 +111,8 @@
                                 ])
                                     @if ($item->status == 2 || $status == 1) disabled @endif><i
                                         class="nf nf-cod-check"></i></button>
-                                <button wire:click="removeTreatment({{ $item->id }})" class="btn btn-danger" @if ($item->status == 2 || $item->histories()->count() > 0 || $status == 1) disabled @endif><i
+                                <button wire:click="removeTreatment({{ $item->id }})" class="btn btn-danger"
+                                    @if ($item->status == 2 || $item->histories()->count() > 0 || $status == 1) disabled @endif><i
                                         class="fa fa-trash"></i></button>
                             </td>
                         </tr>
@@ -123,14 +129,16 @@
             <div class="row">
                 @foreach ($row as $tooth)
                     <div class="col">
-                        <i style="cursor: pointer;"   @if($status == 0) wire:click="toggleTooth('{{ $tooth }}')" @endif @class([
-                            'nf',
-                            'nf-md-tooth_outline',
-                            'fs-3',
-                            'cursor-pointer',
-                            'text-primary' => in_array($tooth, $parts),
-                            'text-black' => !in_array($tooth, $parts),
-                        ])>
+                        <i style="cursor: pointer;"
+                            @if ($status == 0) wire:click="toggleTooth('{{ $tooth }}')" @endif
+                            @class([
+                                'nf',
+                                'nf-md-tooth_outline',
+                                'fs-3',
+                                'cursor-pointer',
+                                'text-primary' => in_array($tooth, $parts),
+                                'text-black' => !in_array($tooth, $parts),
+                            ])>
                             {{ $tooth }}
                         </i>
                     </div>
@@ -147,14 +155,16 @@
                 <div class="row">
                     @foreach ($row as $tooth)
                         <div class="col">
-                            <i style="cursor: pointer;" @if($status == 0) wire:click="toggleTooth('{{ $tooth }}')" @endif @class([
-                                'nf',
-                                'nf-md-tooth_outline',
-                                'fs-3',
-                                'cursor-pointer',
-                                'text-primary' => in_array($tooth, $parts),
-                                'text-black' => !in_array($tooth, $parts),
-                            ])>
+                            <i style="cursor: pointer;"
+                                @if ($status == 0) wire:click="toggleTooth('{{ $tooth }}')" @endif
+                                @class([
+                                    'nf',
+                                    'nf-md-tooth_outline',
+                                    'fs-3',
+                                    'cursor-pointer',
+                                    'text-primary' => in_array($tooth, $parts),
+                                    'text-black' => !in_array($tooth, $parts),
+                                ])>
                                 {{ $tooth }}
                             </i>
                         </div>
@@ -167,7 +177,10 @@
         <div class="col">
             <label for="">Diagnostico</label>
             <textarea wire:model="diagnostic" rows="3" cols="" class="form-control"
-                placeholder="Ingrese Observación..." @if($status == 1) disabled @endif></textarea>
+                placeholder="Ingrese Observación..." @if ($status == 1) disabled @endif></textarea>
+            @error('diagnostic')
+                <span class="text-danger">{{ $message }}</span>
+            @enderror
         </div>
     </div>
     <div class="row mb-3">
@@ -175,26 +188,29 @@
 
             <label for="">Prescripción</label>
             <textarea wire:model="prescription" rows="3" cols="" class="form-control"
-                placeholder="Ingrese Prescripción..." @if($status == 1) disabled @endif></textarea>
+                placeholder="Ingrese Prescripción..." @if ($status == 1) disabled @endif></textarea>
         </div>
     </div>
     <h5 class="text-dark"><strong>Programar Citas</strong></h5>
     <div class="row mb-3">
         <div class="col">
             <label for="">Fecha</label>
-            <input type="date" class="form-control" wire:model.live="date_reservation" @if($status == 1) disabled @endif>
+            <input type="date" class="form-control" wire:model.live="date_reservation"
+                @if ($status == 1) disabled @endif>
         </div>
         <div class="col">
             <label for="">Horario</label>
             <div class="input-group">
-                <select class="form-select" wire:model="schedule_reservation" @if($status == 1) disabled @endif>
+                <select class="form-select" wire:model="schedule_reservation"
+                    @if ($status == 1) disabled @endif>
                     <option value="">Selecione un Horario</option>
                     @foreach ($schedules ?? [] as $item)
                         <option value="{{ $item->id }}">
                             {{ $item->start_time . ':00 - ' . $item->end_time . ':00' }}</option>
                     @endforeach
                 </select>
-                <button wire:click="addReservation" class="btn btn-primary" @if($status == 1) disabled @endif><i class="fa fa-plus"></i></button>
+                <button wire:click="addReservation" class="btn btn-primary"
+                    @if ($status == 1) disabled @endif><i class="fa fa-plus"></i></button>
             </div>
         </div>
     </div>
@@ -212,7 +228,8 @@
                             <td>{{ $item->date }}</td>
                             <td>{{ $item->StaffSchedule->start_time . ':00 - ' . $item->StaffSchedule->end_time . ':00' }}
                             </td>
-                            <td><button wire:click="removeReservation({{ $item->id }})" class="btn btn-danger" @if($status == 1) disabled @endif><i
+                            <td><button wire:click="removeReservation({{ $item->id }})" class="btn btn-danger"
+                                    @if ($status == 1) disabled @endif><i
                                         class="fa fa-trash"></i></button></td>
                         </tr>
                     @endforeach
@@ -233,14 +250,19 @@
         <div class="col">
             <label for="">Cancelado</label>
             <div class="input-group mb-3">
-                <input type="text" class="form-control" wire:model="price" placeholder="Ingrese Cancelado" @if($status == 1) disabled @endif>
+                <input type="text" class="form-control" wire:model="price" placeholder="Ingrese Cancelado"
+                    @if ($status == 1) disabled @endif>
                 <span class="input-group-text">Bs</span>
             </div>
+            @error('price')
+                <span class="text-danger">{{ $message }}</span>
+            @enderror
         </div>
     </div>
     <hr>
     <div class="d-flex justify-content-end">
-        <button wire:click="save" class="btn btn-primary" @if($status == 1) disabled @endif>Guardar</button>
+        <button wire:click="save" class="btn btn-primary"
+            @if ($status == 1) disabled @endif>Guardar</button>
         <button wire:click="back" class="btn btn-secondary">Cancelar</button>
     </div>
 
@@ -249,20 +271,35 @@
 
     <x-modal id="treatment-modal" title="Tratamiento" class="">
         <div class="modal-body">
-            <label for="">Tratamiento</label>
-            <select class="form-select" wire:model="treatment_modal">
-                <option value="">Seleccione Tratamiento</option>
-                @foreach ($treatments_list as $item)
+            <div>
+                <label for="">Tratamiento</label>
+                <select class="form-select" wire:model="treatment_modal">
+                    <option value="">Seleccione Tratamiento</option>
+                    @foreach ($treatments_list as $item)
                     <option value="{{ $item->id }}">{{ $item->name }}</option>
-                @endforeach
-            </select>
-            <label for="">Descripción</label>
-            <textarea wire:model="description_modal" rows="3" class="form-control" placeholder="Ingrese Descripción"></textarea>
-            <label for="">Precio</label>
-            <div class="input-group">
-                <input type="text" class="form-control current" placeholder="Ingrese Precio"
-                    wire:model="price_modal">
-                <span class="input-group-text">Bs</span>
+                    @endforeach
+                </select>
+                @error('treatment_modal')
+                <span class="text-danger">{{ $message }}</span>
+                @enderror
+            </div>
+            <div>
+                <label for="">Descripción</label>
+                <textarea wire:model="description_modal" rows="3" class="form-control" placeholder="Ingrese Descripción"></textarea>
+                @error('description_modal')
+                <span class="text-danger">{{ $message }}</span>
+                @enderror
+            </div>
+            <div>
+                <label for="">Precio</label>
+                <div class="input-group">
+                    <input type="text" class="form-control current" placeholder="Ingrese Precio"
+                                                                    wire:model="price_modal">
+                    <span class="input-group-text">Bs</span>
+                </div>
+                @error('price_modal')
+                <span class="text-danger">{{ $message }}</span>
+                @enderror
             </div>
         </div>
         <div class="modal-footer">

@@ -5,10 +5,16 @@
                 <div class="col">
                     <label for="">CI</label>
                     <input type="number" class="form-control" placeholder="Ingrese su CI" wire:model.live="ci">
+                    @error('ci')
+                        <span class="text-danger">{{ $message }}</span>
+                    @enderror
                 </div>
                 <div class="col">
                     <label for="">Nombre Completo</label>
                     <input type="text" class="form-control" placeholder="Ingrese Nombre Completo" wire:model="name" @if($patient_id) disabled @endif>
+                    @error('name')
+                        <span class="text-danger">{{ $message }}</span>
+                    @enderror
                 </div>
             </div>
             <div class="row mb-3">
@@ -18,10 +24,16 @@
                         <option value="1">Masculino</option>
                         <option value="0">Femenino</option>
                     </select>
+                    @error('gender')
+                        <span class="text-danger">{{ $message }}</span>
+                    @enderror
                 </div>
                 <div class="col">
                     <label for="">Fecha de Nacimiento</label>
                     <input type="date" class="form-control" wire:model="birthdate" @if($patient_id) disabled @endif>
+                    @error('birthdate')
+                        <span class="text-danger">{{ $message }}</span>
+                    @enderror
                 </div>
             </div>
 
@@ -29,6 +41,9 @@
                 <div class="col">
                     <label for="">Telefono</label>
                     <input type="tel" class="form-control" placeholder="Ingrese su Telefono" wire:model="phone" @if($patient_id) disabled @endif>
+                    @error('phone')
+                        <span class="text-danger">{{ $message }}</span>
+                    @enderror
                 </div>
                 <div class="col">
                     <label for="">Celular de Referencia</label>
@@ -39,12 +54,18 @@
                 <div class="col">
                     <label for="">Email</label>
                     <input type="email" class="form-control" placeholder="Ingrese su Email" wire:model="email" @if($patient_id) disabled @endif>
+                    @error('email')
+                        <span class="text-danger">{{ $message }}</span>
+                    @enderror
                 </div>
                 <div class="col"><label for="">Estado de Cuenta</label>
                     <select name="" id="" class="form-select" wire:model="active" @if($patient_id) disabled @endif>
                         <option value="">Activo</option>
                         <option value="">Inactivo</option>
                     </select>
+                    @error('active')
+                        <span class="text-danger">{{ $message }}</span>
+                    @enderror
                 </div>
             </div>
 
@@ -57,6 +78,9 @@
                         <option value="{{ $item->id }}">{{ $item->name }}</option>
                         @endforeach
                     </select>
+                    @error('specialty')
+                        <span class="text-danger">{{ $message }}</span>
+                    @enderror
                 </div>
                 <div class="col">
                     <label for="">Medico</label>
@@ -66,12 +90,18 @@
                         <option value="{{ $item->id }}">{{ $item->person->name }}</option>
                         @endforeach
                     </select>
+                    @error('medic')
+                        <span class="text-danger">{{ $message }}</span>
+                    @enderror
                 </div>
             </div>
             <div class="row">
                 <div class="col">
                     <label for="">Dia</label>
                     <input type="date" class="form-control" wire:model.live="date">
+                    @error('date')
+                        <span class="text-danger">{{ $message }}</span>
+                    @enderror
                 </div>
                 <div class="col">
                     <label for="">Horario</label>
@@ -81,6 +111,9 @@
                         <option value="{{ $item->id }}">{{ $item->start_time . ':00 - ' . $item->end_time . ':00' }}</option>
                         @endforeach
                     </select>
+                    @error('schedule')
+                        <span class="text-danger">{{ $message }}</span>
+                    @enderror
                 </div>
             </div>
         </div>

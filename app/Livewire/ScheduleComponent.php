@@ -96,6 +96,19 @@ class ScheduleComponent extends Component
     }
 
     public function save(){
+        $this->validate([
+            'date' => 'required',
+            'schedule' => 'required',
+            'specialty' => 'required',
+            'medic' => 'required',
+            'ci' => 'required',
+            'name' => 'required',
+            'gender' => 'required',
+            'birthdate' => 'required',
+            'phone' => 'required',
+            'email' => 'required',
+            'active' => 'required',
+        ]);
 
         if($this->patient_id == null){
             $patient = new Person();

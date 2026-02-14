@@ -27,14 +27,29 @@
 
     <x-modal id="treatment-modal" title="Nuevo Tratamiento">
         <div class="modal-body">
-            <label for="">Nombre</label>
-            <input type="text" class="form-control" placeholder="Ingrese el Nombre" wire:model="name">
-            <label for="">Descripción</label>
-            <textarea wire:model="description" class="form-control" placeholder="Ingrese Descripción"></textarea>
-            <label for="">Precio</label>
-            <div class="input-group">
-                <input type="text" class="form-control" placeholder="Ingrese Precio" wire:model="price">
-                <span class="input-group-text">Bs</span>
+            <div>
+                <label for="">Nombre</label>
+                <input type="text" class="form-control" placeholder="Ingrese el Nombre" wire:model="name">
+                @error('name')
+                <span class="text-danger">{{ $message }}</span>
+                @enderror
+            </div>
+            <div>
+                <label for="">Descripción</label>
+                <textarea wire:model="description" class="form-control" placeholder="Ingrese Descripción"></textarea>
+                @error('description')
+                <span class="text-danger">{{ $message }}</span>
+                @enderror
+            </div>
+            <div>
+                <label for="">Precio</label>
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Ingrese Precio" wire:model="price">
+                    <span class="input-group-text">Bs</span>
+                </div>
+                @error('price')
+                <span class="text-danger">{{ $message }}</span>
+                @enderror
             </div>
         </div>
         <div class="modal-footer">

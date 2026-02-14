@@ -32,6 +32,11 @@ class TreatmentComponent extends Component
     }
 
     public function save(){
+        $this->validate([
+            'name' => 'required',
+            'description' => 'required',
+            'price' => 'required',
+        ]);
         if($this->treatment?->id == null)
             $this->treatment = new Treatment();
 

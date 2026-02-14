@@ -66,6 +66,7 @@ class AppointmentComponent extends Component
     }
 
     public function saveTreatment(){
+        $this->validate(['treatment_modal'=>'required','price_modal'=>'required|integer','description_modal'=>'required']);
         if($this->id_modal == null)
             $treatment = new PeopleTreatment();
         else
@@ -161,6 +162,11 @@ class AppointmentComponent extends Component
     }
 
     public function save(){
+        $this->validate([
+            'description' => 'required',
+            'diagnostic' => 'required',
+            'price' => 'required|integer',
+        ]);
         $history = new History();
         $history->description = $this->description;
         $history->diagnostic = $this->diagnostic;

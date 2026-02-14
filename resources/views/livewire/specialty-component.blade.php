@@ -38,6 +38,9 @@
                 <div class="col">
                     <label for="">Descripción</label>
                     <textarea class="form-control" rows="2" wire:model="description"></textarea>
+                    @error('description')
+                        <label class="text-danger">{{ $message }}</label>
+                    @enderror
                 </div>
             </div>
         </div>
