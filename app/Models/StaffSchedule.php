@@ -17,4 +17,8 @@ class StaffSchedule extends Model
     public function staff(){
         return $this->belongsTo(User::class, 'user_id');
     }
+
+    public function reservations(){
+        return $this->hasMany(Reservation::class);
+    }
 }

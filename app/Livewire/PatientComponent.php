@@ -4,7 +4,10 @@ namespace App\Livewire;
 
 use App\Enums\Role;
 use App\Models\Person;
+use App\Models\Reservation;
 use App\Models\User;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Illuminate\Support\Str;
 use Livewire\Attributes\Title;
@@ -94,6 +97,12 @@ class PatientComponent extends Component
     #[Title('Paciente')]
     public function render()
     {
-        return view('livewire.patient-component');
+        $heads = ['ID', ' Fecha', 'Paciente', 'Medico', ' Especialidad', 'Opciones'];
+        $data = Reservation::where('person_id',$this->patient->id)
+            ->whereHas('history',function(Builder $builder){
+                $builder->where('id','!=',null);
+            })->orderBy('date','desc')
+            ->get();
+        return view('livewire.patient-component',compact(['heads','data']));
     }
 }

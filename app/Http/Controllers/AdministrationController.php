@@ -4,9 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Enums\Role;
 use App\Models\Person;
-use App\Models\User;
+use App\Models\Reservation;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AdministrationController extends Controller
 {
@@ -17,29 +18,31 @@ class AdministrationController extends Controller
     }
 
     public function scheduleMedic() {
-        $heads = ['ID', 'Fecha',' Horario', 'Paciente', 'Medico', 'Especialidad', ' Opciones'];
-        $data = [
-            [1, '2024-07-01', '13:00', 'Juan Perez', 'Dr. Smith', 'Cardiologia'],
-            [2, '2024-07-02', '14:00', 'Maria Lopez', 'Dra. Garcia', 'Dermatologia'],
-            [3, '2024-07-03', '15:00', 'Carlos Sanchez', 'Dr. Johnson', 'Neurologia'],
-            [3, '2024-07-03', '16:00', 'Carlos Sanchez', 'Dr. Johnson', 'Neurologia'],
-            [3, '2024-07-03', '17:00', 'Carlos Sanchez', 'Dr. Johnson', 'Neurologia'],
-            [3, '2024-07-03', '18:00', 'Carlos Sanchez', 'Dr. Johnson', 'Neurologia'],
-            [3, '2024-07-03', '19:00', 'Carlos Sanchez', 'Dr. Johnson', 'Neurologia'],
-            [3, '2024-07-03', '20:00', 'Carlos Sanchez', 'Dr. Johnson', 'Neurologia'],
-            [3, '2024-07-03', '21:00', 'Carlos Sanchez', 'Dr. Johnson', 'Neurologia'],
-            [3, '2024-07-03', '22:00', 'Carlos Sanchez', 'Dr. Johnson', 'Neurologia'],
-        ];
-        return view('administration.schedule-medic',compact(['heads','data']));
+        $heads = ['ID', 'Fecha',' Horario', 'Paciente', 'Medico', ' Opciones'];
+        if(Auth::user()?->role == Role::MEDIC){
+            $is_medic = true;
+            $data = Reservation::whereHas('StaffSchedule',function(Builder $builder){
+                $builder->where('user_id',Auth::user()->id);
+            })->where('date','>=',Carbon::now())->orderBy('date','desc')->get();
+        }else{
+            $is_medic = false;
+            $data = Reservation::orderBy('date','desc')->get();
+        }
+        return view('administration.schedule-medic',compact(['heads','data','is_medic']));
+    }
+
+    public function removeSchedule($id){
+        Reservation::destroy($id);
+        return redirect()->back();
     }
 
     public function historyMedic() {
         $heads = ['ID', ' Fecha', 'Paciente', 'Medico', ' Especialidad', 'Opciones'];
-        $data = [
-            [1, '2024-07-01', 'Juan Perez', 'Dr. Smith', 'Cardiologia'],
-            [2, '2024-07-02', 'Maria Lopez', 'Dra. Garcia', 'Dermatologia'],
-            [3, '2024-07-03', 'Carlos Sanchez', 'Dr. Johnson', 'Neurologia'],
-        ];
+        $data = Reservation::whereHas('StaffSchedule',function(Builder $builder){
+            $builder->where('user_id',Auth::user()->id);
+        })->whereHas('history',function(Builder $builder){
+            $builder->where('id','!=',null);
+        })->orderBy('date','desc')->get();
         return view('administration.history-medic', compact(['heads', 'data']));
     }
 

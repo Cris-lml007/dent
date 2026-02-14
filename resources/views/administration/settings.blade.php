@@ -12,6 +12,9 @@
                 <li class="nav-item">
                     <button class="nav-link" aria-current="page" data-bs-toggle="tab" data-bs-target="#specialty-tab">Espcialidades</button>
                 </li>
+                <li class="nav-item">
+                    <button class="nav-link" aria-current="page" data-bs-toggle="tab" data-bs-target="#treatment-tab">Tratamientos</button>
+                </li>
                 <!-- <li class="nav-item"> -->
                 <!--     <a class="nav-link" href="#"></a> -->
                 <!-- </li> -->
@@ -56,6 +59,9 @@
 
                 <div class="tab-pane fade pt-3" id="specialty-tab" role="tabpanel">
                     <livewire:specialty-component></livewire:specialty-component>
+                </div>
+                <div class="tab-pane fade pt-3" id="treatment-tab" role="tabpanel">
+                    <livewire:treatment-component></livewire:treatment-component>
                 </div>
 
             </div>
