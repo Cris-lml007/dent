@@ -79,7 +79,7 @@ class AdministrationController extends Controller
     }
 
     public function historyMedic() {
-        $heads = ['ID', ' Fecha', 'Paciente', 'Medico', ' Especialidad', 'Opciones'];
+        $heads = ['ID', ' Fecha','Horario', 'Paciente', 'Medico', 'Opciones'];
         $data = Reservation::whereHas('StaffSchedule',function(Builder $builder){
             $builder->where('user_id',Auth::user()->id);
         })->whereHas('history',function(Builder $builder){

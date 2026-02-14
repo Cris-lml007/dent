@@ -73,36 +73,47 @@
             </div>
         </div>
         @if ($edit && $patient->id != null)
-        @if (!$patient->users()->where('role',\App\Enums\Role::PATIENT)->exists())
-            <div class="alert alert-warning"><i class="nf nf-cod-warning"></i> Este paciente no tiene una cuenta designada.</div>
-        @endif
+            @if (!$patient->users()->where('role', \App\Enums\Role::PATIENT)->exists())
+                <div class="alert alert-warning"><i class="nf nf-cod-warning"></i> Este paciente no tiene una cuenta
+                    designada.</div>
+            @endif
         @endif
     </div>
-    <h5 class="text-dark"><strong>Historial Medico</strong></h5>
-    <div class="row mb-3">
-        <div class="col">
-            <x-adminlte.tool.datatable id="history-medic-table" :heads="$heads">
-                @foreach ($data as $item)
-                <tr>
-                    <td>{{ $item->id }}</td>
-                    <td>{{ $item->date }}</td>
-                    <td>{{ $item->StaffSchedule->start_time . ':00 - ' . $item->StaffSchedule->end_time . ':00' }}</td>
-                    <td>{{ $item->patient->name }}</td>
-                    <td>{{ $item->StaffSchedule->staff->person->name }}</td>
-                    <td>
-                        <a href="{{ route('administration.schedule-medic.id', $item->id) }}" class="btn btn-primary"><i class="nf nf-fa-clipboard_list"></i></a>
-                    </td>
-                </tr>
-                @endforeach
-            </x-adminlte.tool.datatable>
+    @if ($patient->id != null)
+        <h5 class="text-dark"><strong>Historial Medico</strong></h5>
+        <div class="row mb-3">
+            <div class="col">
+                <x-adminlte.tool.datatable id="history-medic-table" :heads="$heads">
+                    @foreach ($data as $item)
+                        <tr>
+                            <td>{{ $item->id }}</td>
+                            <td>{{ $item->date }}</td>
+                            <td>{{ $item->StaffSchedule->start_time . ':00 - ' . $item->StaffSchedule->end_time . ':00' }}
+                            </td>
+                            <td>{{ $item->patient->name }}</td>
+                            <td>{{ $item->StaffSchedule->staff->person->name }}</td>
+                            <td>
+                                <a href="{{ route('administration.schedule-medic.id', $item->id) }}"
+                                    class="btn btn-primary"><i class="nf nf-fa-clipboard_list"></i></a>
+                                @if ($item->history->id != null)
+                                    <a href="{{ route('administration.consultationPdf', $item->history->id) }}"
+                                        class="btn btn-secondary"><i class="fa fa-file"></i></a>
+                                @endif
+                            </td>
+                        </tr>
+                    @endforeach
+                </x-adminlte.tool.datatable>
+            </div>
         </div>
-    </div>
+
+    @endif
     <div class="modal-footer">
         <button class="btn btn-primary" wire:click="savePatient">Guardar</button>
         @if ($patient->id == null)
             <button class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
         @else
-            <button class="btn btn-danger" id="btn-remove">Eliminar</button>
+        <a href="{{ route('administration.historyPdf', $item->patient->id) }}" class="btn btn-secondary"> Generar Historial</a>
+        <button class="btn btn-danger" id="btn-remove">Eliminar</button>
         @endif
     </div>
 </div>

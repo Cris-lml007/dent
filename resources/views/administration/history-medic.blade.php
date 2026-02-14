@@ -16,6 +16,9 @@
                         <td>{{ $item->StaffSchedule->staff->person->name }}</td>
                         <td>
                             <a href="{{ route('administration.schedule-medic.id', $item->id) }}" class="btn btn-primary"><i class="nf nf-fa-clipboard_list"></i></a>
+                            @if ($item->history->id != null)
+                                <a href="{{ route('administration.consultationPdf', $item->history->id) }}" class="btn btn-secondary"><i class="fa fa-file"></i></a>
+                            @endif
                         </td>
                     </tr>
                 @endforeach

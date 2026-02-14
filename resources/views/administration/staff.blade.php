@@ -16,7 +16,7 @@
                 <tr>
                     <td>{{ $item->ci }}</td>
                     <td>{{ $item->name }}</td>
-                    <td>{{ $u->role->name ?? '' }}</td>
+                    <td>{{ __('messages.' .$u->role->name) ?? '' }}</td>
                     <td>{{ $item->phone }}</td>
                     <td><div @class(['badge', 'badge-success'=> $u->active == 1, 'badge-danger' => $u->active == 0])>{{ $u->active == 1 ? 'Habilitado' : 'Inhabilitado' }}</div></td>
                     <td>

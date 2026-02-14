@@ -97,7 +97,7 @@ class PatientComponent extends Component
     #[Title('Paciente')]
     public function render()
     {
-        $heads = ['ID', ' Fecha', 'Paciente', 'Medico', ' Especialidad', 'Opciones'];
+        $heads = ['ID', ' Fecha','Horario', 'Paciente', 'Medico', 'Opciones'];
         $data = Reservation::where('person_id',$this->patient->id)
             ->whereHas('history',function(Builder $builder){
                 $builder->where('id','!=',null);

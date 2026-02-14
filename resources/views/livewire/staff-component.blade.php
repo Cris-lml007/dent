@@ -82,7 +82,7 @@
                 <select class="form-select" wire:model="role" id="role">
                     <option value="">Seleccione Rol</option>
                     @foreach ($roles as $item)
-                        <option value="{{ $item->value }}">{{ $item->name }}</option>
+                        <option value="{{ $item->value }}">{{ __('messages.'.$item->name) }}</option>
                     @endforeach
                 </select>
                 @error('role')
