@@ -9,7 +9,7 @@
 @section('content')
     <div class="card">
         <div class="card-body">
-            <x-adminlte.tool.datatable id="schedule-table" :heads="$heads" :config="['order' => [[2, 'desc']]]">
+            <x-adminlte.tool.datatable id="schedule-table" :heads="$heads" :config="['order' => [[1,'desc'],[2, 'desc']]]">
                 @foreach ($data as $item)
                     <tr>
                         <td>{{ $item->id }}</td>

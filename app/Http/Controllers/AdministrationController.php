@@ -10,9 +10,9 @@ use App\Models\StaffSchedule;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Request;
 
 class AdministrationController extends Controller
 {
@@ -50,7 +50,7 @@ class AdministrationController extends Controller
             $amount = History::whereHas('reservation',function(Builder $builder){
                 $builder->whereDate('date',Carbon::today());
             })->sum('amount');
-            $sessions = Reservation::whereDate('date','>=',Carbon::today())->count();
+            $sessions = Reservation::whereDate('date',Carbon::today())->whereDoesntHave('history')->count();
             $finish = Reservation::whereDate('date',Carbon::today())->whereHas('history',function(Builder $builder){
                 $builder->where('id','!=',null);
             })->count();
@@ -114,6 +114,143 @@ class AdministrationController extends Controller
     }
 
     public function report(Request $request){
+        $start = $request->start_date
+            ? Carbon::parse($request->start_date)->startOfDay()
+            : now()->startOfMonth();
+
+        $end = $request->end_date
+            ? Carbon::parse($request->end_date)->endOfDay()
+            : now()->endOfMonth();
+
+        $driver = DB::connection()->getDriverName();
+
+        // Compatible SQLite / MySQL
+        $monthExpression = $driver === 'sqlite'
+            ? "strftime('%m', created_at)"
+            : "MONTH(created_at)";
+
+            /*
+            |--------------------------------------------------------------------------
+            | KPI - Total Ingresos
+            | histories.amount existe en tu esquema ✔
+            |--------------------------------------------------------------------------
+             */
+        $totalIncome = History::whereBetween('created_at', [$start, $end])
+            ->sum('amount');
+
+
+            /*
+            |--------------------------------------------------------------------------
+            | KPI - Total Reservas
+            |--------------------------------------------------------------------------
+             */
+        $totalReservations = Reservation::whereBetween('date', [$start, $end])
+            ->count();
+
+
+            /*
+            |--------------------------------------------------------------------------
+            | KPI - Pacientes Nuevos
+            |--------------------------------------------------------------------------
+             */
+        $newPatients = Person::whereBetween('created_at', [$start, $end])
+            ->count();
+
+
+            /*
+            |--------------------------------------------------------------------------
+            | KPI - Cancelaciones Automáticas
+            | Reserva pasada SIN historial
+            |--------------------------------------------------------------------------
+             */
+        $cancelled = Reservation::whereBetween('date', [$start, $end])
+            ->whereDate('date', '<', now())
+            ->doesntHave('history')
+            ->count();
+
+        $cancellationRate = $totalReservations > 0
+            ? round(($cancelled / $totalReservations) * 100, 2)
+            : 0;
+
+
+            /*
+            |--------------------------------------------------------------------------
+            | Ingresos por Mes
+            |--------------------------------------------------------------------------
+             */
+        $income = DB::table('histories')
+            ->selectRaw("$monthExpression as month")
+            ->selectRaw("SUM(amount) as total")
+            ->whereBetween('created_at', [$start, $end])
+            ->groupBy('month')
+            ->orderBy('month')
+            ->get();
+
+        $incomeLabels = $income->pluck('month');
+        $incomeValues = $income->pluck('total');
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | Tratamientos más realizados
+        |--------------------------------------------------------------------------
+         */
+        $treatments = DB::table('history_treatments')
+            ->join('people_treatments', 'history_treatments.people_treatment_id', '=', 'people_treatments.id')
+            ->join('treatments', 'people_treatments.treatment_id', '=', 'treatments.id')
+            ->select('treatments.name')
+            ->selectRaw('COUNT(*) as total')
+            ->groupBy('treatments.name')
+            ->orderByDesc('total')
+            ->get();
+
+        $treatmentLabels = $treatments->pluck('name');
+        $treatmentValues = $treatments->pluck('total');
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | Reservas últimos 7 días
+        |--------------------------------------------------------------------------
+         */
+        $reservations = Reservation::select('date')
+            ->selectRaw('COUNT(*) as total')
+            ->whereDate('date', '>=', now()->subDays(7))
+            ->groupBy('date')
+            ->orderBy('date')
+            ->get();
+
+        $reservationLabels = $reservations->pluck('date');
+        $reservationValues = $reservations->pluck('total');
+
+
+        return view('administration.report', compact(
+            'start',
+            'end',
+            'totalIncome',
+            'totalReservations',
+            'newPatients',
+            'cancelled',
+            'cancellationRate',
+            'incomeLabels',
+            'incomeValues',
+            'treatmentLabels',
+            'treatmentValues',
+            'reservationLabels',
+            'reservationValues'
+        ));
+
+
+
+
+
+
+
+        // failled
+
+
+
+
         $start = $request->start_date ?? now()->startOfMonth()->toDateString();
         $end   = $request->end_date ?? now()->endOfMonth()->toDateString();
 

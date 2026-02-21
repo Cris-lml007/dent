@@ -32,7 +32,7 @@
             <div class="card shadow-sm">
                 <div class="card-body text-center">
                     <h6>Total Ingresos</h6>
-                    <h3>${{ number_format($totalIncome, 2) }}</h3>
+                    <h3>{{ number_format($totalIncome, 2) }} Bs</h3>
                 </div>
             </div>
         </div>

@@ -1,15 +1,15 @@
 @extends('layouts.main')
 
 @section('header')
-    <h1>Principal</h1>
+    <h1>Dashboard Principal</h1>
 @endsection
 
 @section('content')
-    <div class="row">
-        <div class="col">
-            <div class="card bg-primary">
-                <div class="card-body">
-                    <div class="row">
+    <div class="row g-3 align-items-stretch">
+        <div class="col-md-3 d-flex">
+            <div class="card bg-primary w-100">
+                <div class="card-body d-flex align-items-center justify-content-center">
+                    <div class="row w-100">
                         <div class="col text-center align-content-center">
                             <i class="fa fa-users" style="font-size: 4rem;"></i>
                         </div>
@@ -21,10 +21,10 @@
                 </div>
             </div>
         </div>
-        <div class="col">
-            <div class="card bg-secondary">
-                <div class="card-body">
-                    <div class="row">
+        <div class="col-md-3 d-flex">
+            <div class="card bg-secondary w-100">
+                <div class="card-body d-flex align-items-center justify-content-center">
+                    <div class="row w-100">
                         <div class="col text-center align-content-center">
                             <i class="fa fa-door-open" style="font-size: 4rem;"></i>
                         </div>
@@ -36,10 +36,10 @@
                 </div>
             </div>
         </div>
-        <div class="col">
-            <div class="card bg-warning">
-                <div class="card-body">
-                    <div class="row">
+        <div class="col-md-3 d-flex">
+            <div class="card bg-warning w-100">
+                <div class="card-body d-flex align-items-center justify-content-center">
+                    <div class="row w-100">
                         <div class="col text-center align-content-center">
                             <i class="fa fa-money-bill" style="font-size: 4rem;"></i>
                         </div>
@@ -51,10 +51,10 @@
                 </div>
             </div>
         </div>
-        <div class="col">
-            <div class="card bg-success">
-                <div class="card-body">
-                    <div class="row">
+        <div class="col-md-3 d-flex">
+            <div class="card bg-success w-100">
+                <div class="card-body d-flex align-items-center justify-content-center">
+                    <div class="row w-100">
                         <div class="col text-center align-content-center">
                             <i class="fa fa-calendar" style="font-size: 4rem;"></i>
                         </div>
@@ -67,9 +67,10 @@
             </div>
         </div>
     </div>
+    <h5 class="text-dark">Reservas de Hoy</h5>
     <div class="card">
         <div class="card-body">
-            <x-adminlte.tool.datatable id="schedule-table" :heads="$heads">
+            <x-adminlte.tool.datatable id="schedule-table" :heads="$heads" :config="['order' => [[1, 'desc']]]">
                 @foreach ($data as $item)
                     <tr>
                         <td>{{ $item->id }}</td>

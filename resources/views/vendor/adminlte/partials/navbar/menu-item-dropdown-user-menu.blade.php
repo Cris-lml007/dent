@@ -23,7 +23,7 @@
                  alt="{{ Auth::user()->person->name ?? __('messages.'.Auth::user()->role->name) }}">
         @endif
         <span style="color: white !important;" @if(config('adminlte.usermenu_image')) class="d-none d-md-inline" @endif>
-            {{ Auth::user()->person->name ?? __('messages.'.Auth::user()->role->name) }}
+            <i class="fa fa-user"></i> {{ Auth::user()->person->name ?? __('messages.'.Auth::user()->role->name) }}
         </span>
     </a>
 
