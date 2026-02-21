@@ -2,11 +2,17 @@
 
 namespace App\Models;
 
+use Database\Factories\PersonFactory;
+use Illuminate\Database\Eloquent\Attributes\UseFactory;
 use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+#[UseFactory(PersonFactory::class)]
 class Person extends Model
 {
+    use HasFactory;
+
     public $fillable = [
         'ci',
         'name',
@@ -29,5 +35,9 @@ class Person extends Model
 
     public function histories(){
         return $this->hasMany(History::class);
+    }
+
+    public static function newFactory(){
+        return PersonFactory::new();
     }
 }

@@ -260,7 +260,7 @@ return [
     'dashboard_url' => '/dashboard',
     'logout_url' => 'logout',
     'login_url' => 'login',
-    'register_url' => 'register',
+    'register_url' => false,
     'password_reset_url' => 'password/reset',
     'password_email_url' => 'password/email',
     'profile_url' => false,
@@ -336,33 +336,44 @@ return [
             'text' => 'Historial Medico',
             'route' => 'administration.history-medic',
             'icon' => 'fa fa-file-medical',
+            'can' => 'isNotReception'
         ],
         [
             'text' => 'Pacientes',
             'route' => 'administration.patients',
             'icon' => 'fa fa-users',
         ],
-        ['header' => 'Gestión Medica'],
+        ['header' => 'Gestión Medica','can' => 'isNotReception'],
         [
             'text' => 'Tratamientos',
             'route' => 'administration.treatments',
             'icon' => 'nf nf-fa-book_medical',
+            'can' => 'isNotReception'
         ],
         [
             'text' => 'Especialidades',
             'route' => 'administration.specialties',
             'icon' => 'nf nf-md-bookmark_plus',
+            'can' => 'isNotReception'
         ],
         ['header' => 'Avanzados'],
         [
             'text' => 'Personal',
             'route' => 'administration.staff',
             'icon' => 'fa fa-user-md',
+            'can' => 'isAdmin'
         ],
         [
             'text' => 'Reportes',
             'route' => 'administration.report',
             'icon' => 'fa fa-chart-bar',
+            'can' => 'isAdmin'
+        ],
+        [
+            'text' => 'Perfil',
+            'route' => 'administration.profile',
+            'icon' => 'fa fa-user',
+            'can' => 'isNotRoot'
         ],
         // [
         //     'text' => 'Configuraciones',

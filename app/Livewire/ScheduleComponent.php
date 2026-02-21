@@ -45,8 +45,13 @@ class ScheduleComponent extends Component
             $this->phone = $patient->phone;
             $this->ref_phone = $patient->ref_phone;
             $u = $patient->users()->where('role',Role::PATIENT)->first();
-            $this->email = $u->email;
-            $this->active = $u->active;
+            if($u?->id != null){
+                $this->email = $u->email;
+                $this->active = $u->active;
+            }else{
+                $this->email = null;
+                $this->active = null;
+            }
 
             $this->patient_id = $patient->id;
         }else{
@@ -96,19 +101,28 @@ class ScheduleComponent extends Component
     }
 
     public function save(){
-        $this->validate([
-            'date' => 'required',
-            'schedule' => 'required',
-            'specialty' => 'required',
-            'medic' => 'required',
-            'ci' => 'required',
-            'name' => 'required',
-            'gender' => 'required',
-            'birthdate' => 'required',
-            'phone' => 'required',
-            'email' => 'required',
-            'active' => 'required',
-        ]);
+        if($this->patient_id == null){
+            $this->validate([
+                'date' => 'required',
+                'schedule' => 'required',
+                'specialty' => 'required',
+                'medic' => 'required',
+                'ci' => 'required',
+                'name' => 'required',
+                'gender' => 'required',
+                'birthdate' => 'required',
+                'phone' => 'required',
+                'email' => 'required',
+                'active' => 'required',
+            ]);
+        }else{
+            $this->validate([
+                'date' => 'required',
+                'schedule' => 'required',
+                'specialty' => 'required',
+                'medic' => 'required',
+            ]);
+        }
 
         if($this->patient_id == null){
             $patient = new Person();
@@ -138,11 +152,19 @@ class ScheduleComponent extends Component
             'staff_schedule_id' => $this->schedule,
             'date' => $this->date
         ]);
-        redirect()->route('administration.schedule-medic');
+
+        if(Auth::user()->role == Role::PATIENT){
+            return redirect()->route('home');
+        }else{
+            return redirect()->route('administration.schedule-medic');
+        }
     }
 
     public function mount(){
         $this->medics_list = User::where('role',Role::MEDIC)->get();
+        if(Auth::user()->role == Role::PATIENT){
+            $this->patient_id = Auth::user()->person_id;
+        }
     }
 
     public function render()

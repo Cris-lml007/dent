@@ -112,7 +112,7 @@
         @if ($patient->id == null)
             <button class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
         @else
-        <a href="{{ route('administration.historyPdf', $item->patient->id) }}" class="btn btn-secondary"> Generar Historial</a>
+        <a href="{{ route('administration.historyPdf', $patient->id) }}" class="btn btn-secondary"> Generar Historial</a>
         <button class="btn btn-danger" id="btn-remove">Eliminar</button>
         @endif
     </div>

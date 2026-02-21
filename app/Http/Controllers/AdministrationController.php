@@ -17,6 +17,10 @@ use Illuminate\Support\Facades\Request;
 class AdministrationController extends Controller
 {
     public function index(){
+        if(Auth::user()->role == Role::PATIENT){
+            return redirect()->route('home');
+        }
+
         $heads = ['ID', 'Horario','Paciente', 'Medico', 'Especialidad'];
         if(Auth::user()->role == Role::MEDIC){
             $sessions = Reservation::whereHas('StaffSchedule',function(Builder $builder){

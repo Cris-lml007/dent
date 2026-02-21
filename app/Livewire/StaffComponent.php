@@ -6,6 +6,7 @@ use App\Enums\Role;
 use App\Models\Person;
 use App\Models\Specialty;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
 use Livewire\Attributes\Title;
 use Livewire\Attributes\Validate;
@@ -40,6 +41,9 @@ class StaffComponent extends Component
     public $edit = false;
 
     public function mount(Person $person = null){
+        if($person->id != Auth::user()->person_id && Auth::user()->role != Role::ADMIN){
+            abort(403);
+        }
         if($person->id != null){
             $this->ci = $person->ci;
             $this->name = $person->name;

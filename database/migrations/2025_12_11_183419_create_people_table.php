@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('people', function (Blueprint $table) {
             $table->id();
-            $table->integer('ci');
+            $table->integer('ci')->unique();
             $table->string('name');
             $table->date('birthdate');
             $table->integer('gender');
