@@ -108,26 +108,26 @@
                             </div>
                         </div>
                     </div>
-                    <div class="carousel-item">
-                        <div class="banner_section">
-                            <div class="container">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <h1 class="banner_taital">Tratamientos <br><span
-                                                style="color: #151515;">Especializados</span></h1>
-                                        <p class="banner_text">Tratamientos especial para tu cuerpo.</p>
-                                        <div class="btn_main">
-                                            <div class="more_bt"><a href="#"
-                                                    wire:click="getWhatsapp">Contactanos</a></div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="image_1"><img src="images/mus.png" style="height: 440px;"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <!-- <div class="carousel-item"> -->
+                    <!--     <div class="banner_section"> -->
+                    <!--         <div class="container"> -->
+                    <!--             <div class="row"> -->
+                    <!--                 <div class="col-md-6"> -->
+                    <!--                     <h1 class="banner_taital">Tratamientos <br><span -->
+                    <!--                             style="color: #151515;">Especializados</span></h1> -->
+                    <!--                     <p class="banner_text">Tratamientos especial para tu cuerpo.</p> -->
+                    <!--                     <div class="btn_main"> -->
+                    <!--                         <div class="more_bt"><a href="#" -->
+                    <!--                                 wire:click="getWhatsapp">Contactanos</a></div> -->
+                    <!--                     </div> -->
+                    <!--                 </div> -->
+                    <!--                 <div class="col-md-6"> -->
+                    <!--                     <div class="image_1"><img src="images/mus.png" style="height: 440px;"></div> -->
+                    <!--                 </div> -->
+                    <!--             </div> -->
+                    <!--         </div> -->
+                    <!--     </div> -->
+                    <!-- </div> -->
                 </div>
                 <a class="carousel-control-prev" href="#main_slider" role="button" data-slide="prev">
                     <i class="fa fa-long-arrow-left" style="font-size:24px; padding-top: 4px;"></i>
@@ -183,19 +183,19 @@
                 <div class="news_section_2 layout_padding">
                     <div class="row">
                         <div class="col-lg-4 col-sm-6">
-                            <div class="box_main">
+                            <div class="box_main" style="height: 100%;display: flex; flex-direction: column; justify-content: center;">
                                 <div class="icon_1"><img src="images/icon-2.png"></div>
                                 <h4 class="daily_text">expertos en cuidado</h4>
                             </div>
                         </div>
                         <div class="col-lg-4 col-sm-6">
-                            <div class="box_main active">
+                            <div class="box_main active" style="height: 100%;display: flex; flex-direction: column; justify-content: center;">
                                 <div class="icon_1"><img src="images/icon-3.png"></div>
-                                <h4 class="daily_text_1">disponible 24/7</h4>
+                                <h4 class="daily_text_1">atención<br>24/7</h4>
                             </div>
                         </div>
                         <div class="col-lg-4 col-sm-6">
-                            <div class="box_main">
+                            <div class="box_main" style="height: 100%;display: flex; flex-direction: column; justify-content: center;">
                                 <div class="icon_1"><img src="images/icon-4.png"></div>
                                 <h4 class="daily_text_1">cuidado equilibrado</h4>
                             </div>
