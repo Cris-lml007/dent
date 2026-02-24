@@ -4,14 +4,19 @@ namespace App\Policies;
 
 use App\Enums\Role;
 use App\Models\User;
+use Illuminate\Http\Request;
 
 class UserRolePolicy
 {
     /**
      * Create a new policy instance.
      */
-    public function __construct()
+    public function __construct(Request $request)
     {
+        if($request->user()->active == 0){
+            $request->session()->flush();
+        }
+        // dd($request->user()->role);
         //
     }
 
