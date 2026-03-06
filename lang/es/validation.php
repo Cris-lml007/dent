@@ -284,5 +284,10 @@ return [
         'winner'                   => 'ganador',
         'work'                     => 'trabajo',
         'year'                     => 'año',
+        'birthdate'                 => 'fecha de nacimiento',
+        'specialty'                 => 'especialidad',
+        'medic'                     => 'médico',
+        'schedule'                   => 'horario',
+        'active'                     => 'estado',
     ],
 ];
